@@ -1,6 +1,7 @@
 import { GestureResponderEvent, Pressable, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { icon } from '@/constants/Icon'
+import Animated, { interpolate, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated'
 
 type Props = {
   onPress: (event: GestureResponderEvent) => void,
@@ -13,7 +14,36 @@ type Props = {
 
 const TabBarButton = ({onPress, onLongPress, isFocused, routeName, color, label}: Props) => {
 
+  const scale = useSharedValue(0);
+
+  useEffect(() => {
+    scale.value = withSpring(typeof isFocused === 'boolean' 
+      ? (isFocused ? 1 : 0) : isFocused, 
+      {duration: 350}
+    );
+  }, [scale, isFocused])
   
+  const animatedTextStyle = useAnimatedStyle(() => {
+    const opacity = interpolate(scale.value, [0, 1], [1, 0]);
+
+    return {
+      opacity
+    }
+  });
+
+  const animatedIconStyle = useAnimatedStyle(() => {
+
+    const scaleValue = interpolate(scale.value, [0, 1], [1, 1.2]);
+
+    const top = interpolate(scale.value, [0, 1], [0, 9]);
+
+    return {
+      transform: [{
+        scale: scaleValue
+      }],
+      top
+    }
+  });
 
   return (
     <Pressable
@@ -21,12 +51,17 @@ const TabBarButton = ({onPress, onLongPress, isFocused, routeName, color, label}
       onLongPress={onLongPress}
       style={styles.tabBarItem}
     >
-      {icon[routeName]({
-        color: isFocused ? '#673ab7' : '#222',
-      })}
-      <Text style={{ color: isFocused ? '#673ab7' : '#222' }}>
+      <Animated.View style={[animatedIconStyle]}>
+        {icon[routeName]({
+          color: isFocused ? 'white' : '#222',
+        })}
+      </Animated.View>
+      <Animated.Text style={[
+        { color: isFocused ? '#673ab7' : '#222', fontSize: 12 },
+        animatedTextStyle
+      ]}>
         {label as string}
-      </Text>
+      </Animated.Text>
     </Pressable>
   )
 }
