@@ -32,7 +32,7 @@ export function TabBar({ state, descriptors, navigation } : BottomTabBarProps) {
       <Animated.View 
         style={[animatedStyleBg, {
           position: 'absolute',
-          backgroundColor: '#723FEB',
+          backgroundColor: '#62C370',
           borderRadius: 30,
           marginHorizontal: 12,
           height: dimensions.height - 15,
@@ -81,23 +81,6 @@ export function TabBar({ state, descriptors, navigation } : BottomTabBarProps) {
             color={ isFocused ? 'white' : '#222'}
             label={label}
           />
-          /* <TouchableOpacity
-            key={route.name}
-            accessibilityRole="button"
-            accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarTestID}
-            onPress={onPress}
-            onLongPress={onLongPress}
-            style={styles.tabBarItem}
-          >
-            {icon[route.name]({
-              color: isFocused ? '#673ab7' : '#222',
-            })}
-            <Text style={{ color: isFocused ? '#673ab7' : '#222' }}>
-              {label as string}
-            </Text>
-          </TouchableOpacity> */
         );
       })}
     </View>
@@ -118,6 +101,7 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 10},
     shadowRadius: 10,
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.43,
+    elevation: 2,
   }
 });
