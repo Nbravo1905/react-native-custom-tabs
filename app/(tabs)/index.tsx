@@ -7,7 +7,7 @@ type Props = {}
 const Page = (props: Props) => {
   return (
     <>
-      <StatusBar style='dark' />
+      <StatusBar style='light' />
       <View style={styles.container}>
         <Text style={{ fontFamily: 'SpaceMono', color: '#fff', fontSize: 16 }}> Home Page</Text>
       </View>
