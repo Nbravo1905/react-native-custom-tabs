@@ -6,7 +6,7 @@ type Props = {}
 const Page = (props: Props) => {
   return (
     <View style={styles.container}>
-      <Text> Explore Page</Text>
+      <Text style={{ fontFamily: 'SpaceMono', color: '#fff', fontSize: 16 }}> Explore Page</Text>
     </View>
   )
 }
@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#30638E'
   }
 })
